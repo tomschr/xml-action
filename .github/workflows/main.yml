@@ -11,16 +11,19 @@ jobs:
       run: |
         ls -l
 
-    - id: xml
+    - id: xml-good
       uses: ./
       with:
-         xmlfiles: tests/*.xml
+         xmlfiles: tests/good/*.xml
+
+    - id: xml-bad
+      uses: ./
+      with:
+         xmlfiles: tests/bad/*.xml
 
     - run: |
-        echo xmllint result: ${{ steps.xml.outputs.xmllint-output }}
-
-#    - run: echo random-number ${{ steps.xml.outputs.random-number }}
-#      shell: bash
+        echo xmllint good result: ${{ steps.xml-good.outputs.xmllint-output }}
+        echo xmllint bad result: ${{ steps.xml-bad.outputs.xmllint-output }}
 
 #    - name: Using openSUSE Leap 15.2
 #      uses: docker://opensuse/leap:15.2

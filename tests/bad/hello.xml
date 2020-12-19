@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE greetings
+[
+  <!ENTITY name "Tux">
+]>
+<greetings>
+   <!-- Add a syntax error -->
+   Hello &name!
+</greetings>
