@@ -22,14 +22,10 @@ runs:
   using: "composite"
   steps:
 
-#    - id: random-number-generator
-#      run: echo "::set-output name=random-id::$(echo $RANDOM)"
+#    - id: env
+#      run: |
+#        ${{ github.action_path }}/printgithubenv.sh
 #      shell: bash
-
-    - id: env
-      run: |
-        ${{ github.action_path }}/printgithubenv.sh
-      shell: bash
 
     - id: whereis-xmllint-output
       run: |

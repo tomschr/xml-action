@@ -12,11 +12,13 @@ jobs:
         ls -l
 
     - id: xml-good
+      name: Testing good XML
       uses: ./
       with:
          xmlfiles: tests/good/*.xml
 
     - id: xml-bad
+      name: Testing bad XML
       uses: ./
       with:
          xmlfiles: tests/bad/*.xml
