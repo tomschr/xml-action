@@ -21,6 +21,3 @@ runs:
 
     - run: ${{ github.action_path }}/goodbye.sh
       shell: bash
-
-    - name: Using openSUSE Leap 15.2
-      uses: docker://opensuse/leap:15.2
