@@ -13,8 +13,11 @@ jobs:
       uses: ./
       with:
         who-to-greet: 'Mona the Octocat'
-    - run: echo random-number ${{ steps.foo.outputs.random-number }} 
+
+    - run: echo random-number ${{ steps.foo.outputs.random-number }}
       shell: bash
 
-    - name: Using openSUSE Leap 15.2
-      uses: docker://opensuse/leap:15.2
+    - run: echo xmllint path ${{ steps.foo.outputs.xml-output }}
+
+#    - name: Using openSUSE Leap 15.2
+#      uses: docker://opensuse/leap:15.2

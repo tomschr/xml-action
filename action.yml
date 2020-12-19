@@ -1,14 +1,20 @@
-name: 'Hello World'
+name: 'XML Wellformedness'
 description: 'Greet someone'
+
 inputs:
   who-to-greet:  # id of input
     description: 'Who to greet'
     required: true
     default: 'World'
+
 outputs:
   random-number: 
     description: "Random number"
     value: ${{ steps.random-number-generator.outputs.random-id }}
+  xml-output:
+    description: "Path to xmllint"
+    value: ${{ steps.whereis-xmllint-output.outputs.xmllint }}
+
 runs:
   using: "composite"
   steps: 
@@ -19,5 +25,13 @@ runs:
       run: echo "::set-output name=random-id::$(echo $RANDOM)"
       shell: bash
 
+    - id: whereis-xmllint-output
+      run: echo "::set-output name=xmllint::$(whereis xmllint)"
+      shell: bash
+
     - run: ${{ github.action_path }}/goodbye.sh
       shell: bash
+
+branding:
+    icon: "book-open"
+    color: "green"
