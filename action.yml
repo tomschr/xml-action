@@ -1,37 +1,47 @@
-name: 'XML Wellformedness'
-description: 'Greet someone'
+name: 'XML syntax check'
+description: 'Check XML files if they are syntactically correct'
 
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  xmlfiles:   # id of input
+    description: "The XML files to check for wellformedness"
     required: true
-    default: 'World'
+    default: "*.xml"
 
 outputs:
-  random-number: 
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-id }}
-  xml-output:
+#  random-number: 
+#    description: "Random number"
+#    value: ${{ steps.random-number-generator.outputs.random-id }}
+  xmllint-path:
     description: "Path to xmllint"
     value: ${{ steps.whereis-xmllint-output.outputs.xmllint }}
+  xmllint-output:
+    description: "Output of xmllint check"
+    value: ${{ steps.check-xmlfiles.outputs.result }}
 
 runs:
   using: "composite"
-  steps: 
-    - run: echo Hello ${{ inputs.who-to-greet }}.
-      shell: bash
+  steps:
 
-    - id: random-number-generator
-      run: echo "::set-output name=random-id::$(echo $RANDOM)"
+#    - id: random-number-generator
+#      run: echo "::set-output name=random-id::$(echo $RANDOM)"
+#      shell: bash
+
+    - id: env
+      run: |
+        ${{ github.action_path }}/printgithubenv.sh
       shell: bash
 
     - id: whereis-xmllint-output
       run: |
-        sudo apt-get install libxml2-utils xsltproc xmlstarlet
+        # xsltproc xmlstarlet
+        sudo apt-get install libxml2-utils
         echo "::set-output name=xmllint::$(whereis xmllint)"
       shell: bash
 
-    - run: ${{ github.action_path }}/goodbye.sh
+    - id: check-xmlfiles
+      run: |
+        xmllint --noout --noent ${{ inputs.xmlfiles }}
+        echo "::set-output name=result::$?"
       shell: bash
 
 branding:

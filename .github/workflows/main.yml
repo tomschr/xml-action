@@ -1,23 +1,26 @@
 on: [push]
 
 jobs:
-  hello_world_job:
+  check-xmlfiles:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Check XML files
     steps:
     - uses: actions/checkout@v2
+
     - name: Display environment
       run: |
         ls -l
-    - id: foo
+
+    - id: xml
       uses: ./
       with:
-        who-to-greet: 'Mona the Octocat'
+         xmlfiles: tests/*.xml
 
-    - run: echo random-number ${{ steps.foo.outputs.random-number }}
-      shell: bash
+    - run: |
+        echo xmllint result: ${{ steps.xml.outputs.xmllint-output }}
 
-    - run: echo xmllint path ${{ steps.foo.outputs.xml-output }}
+#    - run: echo random-number ${{ steps.xml.outputs.random-number }}
+#      shell: bash
 
 #    - name: Using openSUSE Leap 15.2
 #      uses: docker://opensuse/leap:15.2

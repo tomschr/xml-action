@@ -12,7 +12,3 @@ echo "GITHUB_SHA=$GITHUB_SHA"
 echo "GITHUB_REF=$GITHUB_REF"
 echo "GITHUB_HEAD_REF=$GITHUB_HEAD_REF"
 echo "GITHUB_BASE_REF=$GITHUB_BASE_REF"
-echo "::debug::---Start content of file $GITHUB_EVENT_PATH"
-# cat $GITHUB_EVENT_PATH
-
-echo "Goodbye"
