@@ -26,7 +26,9 @@ runs:
       shell: bash
 
     - id: whereis-xmllint-output
-      run: echo "::set-output name=xmllint::$(whereis xmllint)"
+      run: |
+        sudo apt-get install libxml2-utils xsltproc xmlstarlet
+        echo "::set-output name=xmllint::$(whereis xmllint)"
       shell: bash
 
     - run: ${{ github.action_path }}/goodbye.sh
